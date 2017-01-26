@@ -1,0 +1,7 @@
+#!/bin/sh
+set -Ceu
+#set -x ## Uncomment for debugging
+
+pacmd-get-sink-bluez | xargs --no-run-if-empty pacmd "$@"
+
+exit 0

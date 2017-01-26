@@ -1,0 +1,8 @@
+#!/bin/sh
+set -Ceu
+#set -x ## Uncomment for debugging
+
+pactl list short sources | cut --fields=2 | sed --expression="/analog-stereo$/p; d"
+
+exit 0
+

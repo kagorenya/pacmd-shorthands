@@ -1,0 +1,12 @@
+#!/bin/sh
+set -Ceu
+#set -x ## Uncomment for debugging
+
+test "x${1:-}" = "x" && {
+    printf "Input a word about a sink-input:? "
+    read -r REPLY
+}
+
+pacmd-get-sink-input "${1:-$REPLY}" | xargs --no-run-if-empty pacmd-analog-sink move-sink-input
+
+exit 0

@@ -1,0 +1,17 @@
+#!/bin/sh
+## Control Pulse Audio
+set -Ceu
+set -x ## Uncomment for debugging
+
+test $# -eq 0 || {
+    case "$1" in
+        mute)
+            pactl list short sink-inputs | cut --fields=1 | xargs -I{} pactl set-sink-input-mute {} toggle
+            ;;
+        *) pactl list short sinks | cut --fields=1 | xargs -I{} pactl set-sink-volume {} "$1" ;;
+    esac
+}
+canberra-gtk-play --id="audio-volume-change"
+printf "Current Volume: %s\n" "$(pactl list sinks | grep front-left: | cut -d' ' --fields=6)" 1>&2
+
+exit 0

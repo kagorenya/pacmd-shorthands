@@ -12,6 +12,6 @@ test $# -eq 0 || {
     esac
 }
 canberra-gtk-play --id="audio-volume-change"
-printf "Current Volume: %s\n" "$(pactl list sinks | grep front-left: | cut -d' ' --fields=6)" 1>&2
+printf "Current Volume: %s\n" "$(pactl list sinks | sed --expression="/Volume:/q; d" | cut -d'/' --fields=2 | tr --delete " ")" 1>&2
 
 exit 0

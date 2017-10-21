@@ -1,6 +1,6 @@
 #!/bin/sh
 ## Control Pulse Audio
-set -Ceu
+set -Cu
 #set -x ## Uncomment for debugging
 
 test $# -eq 0 || {

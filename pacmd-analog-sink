@@ -1,5 +1,5 @@
 #!/bin/sh
-set -Ceu
+set -Cu
 #set -x ## Uncomment for debugging
 
 pacmd-get-sink-analog | xargs --no-run-if-empty pacmd "$@"

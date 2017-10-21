@@ -4,5 +4,5 @@ set -Ceu
 
 pacmd-get-source-analog | xargs --no-run-if-empty -I {} pactl set-source-port {} analog-input-linein
 
-exit 0
+exit $?
 

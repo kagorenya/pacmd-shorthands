@@ -4,5 +4,5 @@ set -Ceu
 
 pactl list short sinks | cut --fields=2 | sed --expression="/analog/p; d"
 
-exit 0
+exit $?
 

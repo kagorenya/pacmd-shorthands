@@ -7,5 +7,5 @@ printf "Select source index:? " >&2
 read -r REPLY
 echo "$REPLY"
 
-exit 0
+exit $?
 

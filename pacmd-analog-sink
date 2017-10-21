@@ -4,4 +4,4 @@ set -Ceu
 
 pacmd-get-sink-analog | xargs --no-run-if-empty pacmd "$@"
 
-exit 0
+exit $?

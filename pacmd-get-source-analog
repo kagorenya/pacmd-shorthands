@@ -4,5 +4,5 @@ set -Ceu
 
 pactl list short sources | cut --fields=2 | sed --expression="/analog-stereo$/p; d"
 
-exit 0
+exit $?
 

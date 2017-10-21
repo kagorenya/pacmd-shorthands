@@ -4,4 +4,4 @@ set -Ceu
 
 pacmd-get-source | xargs --no-run-if-empty pacmd "$@"
 
-exit 0
+exit $?

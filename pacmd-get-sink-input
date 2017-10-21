@@ -9,4 +9,4 @@ test "x${1:-}" = "x" && {
 
 pactl list sink-inputs | sed --expression="/${1:-$REPLY}/g; /^[0-9]\+$/q; s/^Sink [^0-9]\+\(.\+\)/\1/; /^[0-9]\+$/h; d"
 
-exit 0
+exit $?

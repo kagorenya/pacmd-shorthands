@@ -9,4 +9,4 @@ test "x${1:-}" = "x" && {
 
 pacmd-get-sink-input "${1:-$REPLY}" | xargs --no-run-if-empty pacmd-analog-sink move-sink-input
 
-exit 0
+exit $?

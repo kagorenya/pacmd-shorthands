@@ -1,6 +1,6 @@
 #!/bin/sh
 set -Cu
-#set -x ## Uncomment for debugging
+#set -vx ## Uncomment for debugging
 
 pactl list short sources | cut --fields=1,2 | cat >&2
 printf "Select source index:? " >&2

@@ -1,6 +1,6 @@
 #!/bin/sh
 set -Cu
-#set -x ## Uncomment for debugging
+#set -vx ## Uncomment for debugging
 
 pactl list short sinks | cut --fields=2 | sed --expression="/bluez_sink/p; d"
 

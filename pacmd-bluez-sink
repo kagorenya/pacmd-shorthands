@@ -1,6 +1,6 @@
 #!/bin/sh
 set -Cu
-#set -x ## Uncomment for debugging
+#set -vx ## Uncomment for debugging
 
 pacmd-get-sink-bluez | xargs --no-run-if-empty pacmd "$@"
 

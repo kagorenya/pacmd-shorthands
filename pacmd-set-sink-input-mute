@@ -1,6 +1,6 @@
 #!/bin/sh
 set -Cu
-#set -x ## Uncomment for debugging
+#set -vx ## Uncomment for debugging
 
 test "x${1:-}" = "x" && {
     printf "Input a word about a sink-input:? "

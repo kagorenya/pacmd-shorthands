@@ -1,6 +1,6 @@
 #!/bin/sh
 set -Cu
-#set -x ## Uncomment for debugging
+#set -vx ## Uncomment for debugging
 
 LC_ALL=C pactl info | sed -e "/Default Sink/s/.\+: \(.\+\)/\1/p; d"
 

@@ -7,6 +7,6 @@ test "x${1:-}" = "x" && {
     read -r REPLY
 }
 
-pactl list sink-inputs | sed --expression="/${1:-$REPLY}/g; /^[0-9]\+$/q; s/^Sink [^0-9]\+\(.\+\)/\1/; /^[0-9]\+$/h; d"
+LC_ALL=C pactl list sink-inputs | sed --expression="/${1:-$REPLY}/g; /^[0-9]\+$/q; s/^Sink [^0-9]\+\(.\+\)/\1/; /^[0-9]\+$/h; d"
 
 exit $?

@@ -2,7 +2,7 @@
 set -Cu
 #set -vx ## Uncomment for debugging
 
-pactl list short sources | cut --fields=1,2 | cat >&2
+LC_ALL=C pactl list short sources | cut --fields=1,2 | cat >&2
 printf "Select sink index:? " >&2
 read -r REPLY
 echo "$REPLY"

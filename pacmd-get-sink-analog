@@ -2,7 +2,7 @@
 set -Cu
 #set -vx ## Uncomment for debugging
 
-LC_ALL=C pactl list short sinks | cut --fields=2 | sed --expression="/analog/p; d"
+LC_ALL=C pactl list short sinks | sed --expression="/analog/{; s/.\+[[:space:]]\([^[:space:]]\+analog[^[:space:]]\+\).\+/\1/; p; }; d"
 
 exit $?
 

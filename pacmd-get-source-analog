@@ -2,7 +2,7 @@
 set -Cu
 #set -vx ## Uncomment for debugging
 
-LC_ALL=C pactl list short sources | cut --fields=2 | sed --expression="/analog-stereo$/p; d"
+LC_ALL=C pactl list short sources | sed --expression="/analog-stereo$/{; s/.\+[[:space:]]\([^[:space:]]\+analog-stereo\)[[:space:]].\+/\1/; p; }; d"
 
 exit $?
 

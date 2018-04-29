@@ -11,7 +11,7 @@ test $# -eq 0 || {
         *) pacmd-get-default-sink | xargs --no-run-if-empty -I{} pactl set-sink-volume {} "$1" ;;
     esac
 
-    canberra-gtk-play --id="audio-volume-change"
+    paplay "${XDG_DATA_HOME}/sounds/default/stereo/audio-volume-change.oga"
     printf "Current Volume: %s\n" "$(pactl list sinks | sed --expression="/Volume:/q; d" | cut -d'/' --fields=2 | tr --delete " ")" 1>&2
 }
 

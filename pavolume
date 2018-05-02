@@ -8,7 +8,10 @@ test $# -eq 0 || {
         mute)
             pactl list short sink-inputs | cut --fields=1 | xargs -I{} pactl set-sink-input-mute {} toggle
             ;;
-        *) pacmd-get-default-sink | xargs --no-run-if-empty -I{} pactl set-sink-volume {} "$1" ;;
+        *)
+            pacmd-get-default-sink | xargs --no-run-if-empty -I{} pactl set-sink-volume {} "$1" && \
+            paplay "${XDG_DATA_HOME}/sounds/default/stereo/audio-volume-change.oga"
+            ;;
     esac
 
     paplay "${XDG_DATA_HOME}/sounds/default/stereo/audio-volume-change.oga"

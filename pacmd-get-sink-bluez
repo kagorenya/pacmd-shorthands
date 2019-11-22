@@ -2,6 +2,6 @@
 set -Cu
 #set -vx ## Uncomment for debugging
 
-LC_ALL=C pactl list short sinks | sed --expression="/bluez_sink/{; s/.\+[[:space:]]\([^[:space:]]\+bluez[^[:space:]]\+\).\+/\1/; p; }; d"
+LC_ALL=C pactl list short sinks | sed --expression="/bluez_sink/{; s/\\([[:digit:]]\\+\\).\\+/\\1/; p; }; d"
 
 exit $?

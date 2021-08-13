@@ -14,7 +14,7 @@ test $# -eq 0 || {
             ;;
     esac
 
-    printf "Current Volume: %s\n" "$(pactl list sinks | sed --expression="/Volume:/{; s#^[^/]\+/[[:space:]]\+\([^[:space:]]\+\).\+#\1#; q; }; d")" 1>&2
+    printf "Current Volume: %s\n" "$(LANG=C pactl list sinks | sed --expression="/Volume:/{; s#^[^/]\+/[[:space:]]\+\([^[:space:]]\+\).\+#\1#; q; }; d")" 1>&2
 }
 
 exit $?

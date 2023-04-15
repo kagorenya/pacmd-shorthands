@@ -1,0 +1,7 @@
+#!/bin/sh
+set -Cu
+#set -vx ## Uncomment for debugging
+
+pacmd-get-sink-hdmi | xargs --no-run-if-empty pacmd "$@"
+
+exit $?

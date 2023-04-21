@@ -2,7 +2,7 @@
 set -Cu
 #set -vx ## Uncomment for debugging
 
-pacmd-get-source-analog | xargs --no-run-if-empty -I {} pactl set-source-port {} analog-input-front-mic
+pacmd-get-source-analog | xargs --no-run-if-empty -I @ pactl set-source-port @ analog-input-front-mic
 
 exit $?
 

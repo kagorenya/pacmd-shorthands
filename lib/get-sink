@@ -1,0 +1,17 @@
+#!/bin/bash
+set -Cu
+#set -vx ## Uncomment for debugging
+
+if [[ "$#" -eq 0 ]]; then
+    echo "Select sink index..." >&2
+    mapfile -t < <(pactl list short sinks | cut --fields=1,2)
+    select line in "${MAPFILE[@]}"
+    do
+        echo "$line" | cut --fields=1
+        break
+    done
+else
+    LC_ALL=C pactl list short sinks | sed "/${1}/{; s/\\([[:digit:]]\\+\\).\\+/\\1/; p; }; d"
+fi
+
+exit $?

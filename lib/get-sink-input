@@ -1,12 +1,30 @@
-#!/bin/sh
+#!/bin/bash
 set -Cu
 #set -vx ## Uncomment for debugging
+mapfile -t < <(LC_ALL=C pactl list sink-inputs | sed "s/^[[:space:]]//; /library\./d; /Sink Input/p; /\.binary/p; /\.name/p; d")
 
-test "$#" -eq 0 && {
-    printf "Input a word about a sink-input:? "
-    read -r REPLY
-}
-
-LC_ALL=C pactl list sink-inputs | sed "/${1:-$REPLY}/g; /^[0-9]\+$/q; s/^Sink [^0-9]\+\(.\+\)/\1/; /^[0-9]\+$/h; d"
+if [[ "$#" -eq 0 ]]; then
+    echo "Select sink-input index..." >&2
+    for line in "${MAPFILE[@]}"
+    do
+        echo "$line"
+    done
+    mapfile -t < <(LC_ALL=C pactl list short sink-inputs | cut --field=1)
+    select line in "${MAPFILE[@]}"
+    do
+        echo "$line"
+        break
+    done
+else
+    for line in "${MAPFILE[@]}"
+    do
+        if [[ "${line#Sink Input #}" =~ ^[[:digit:]]+$ ]]; then
+            sinkinput="${line#Sink Input #}"
+        elif [[ "$line" =~ $1 ]]; then
+            echo "$sinkinput"
+            break
+        fi
+    done
+fi
 
 exit $?

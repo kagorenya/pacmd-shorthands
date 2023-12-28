@@ -1,0 +1,17 @@
+#!/bin/bash
+set -Cu
+#set -vx ## Uncomment for debugging
+
+if [[ "$#" -eq 0 ]]; then
+    echo "Select input source index..." >&2
+    mapfile -t < <(pactl list short sources | cut --fields=1,2 | sed "/input/p; d")
+    select line in "${MAPFILE[@]}"
+    do
+        echo "$line" | cut --fields=1
+        break
+    done
+else
+    LC_ALL=C pactl list short sources | sed "/output/d; /${1}/{; s/\\([[:digit:]]\\+\\).\\+/\\1/; p; }; d"
+fi
+
+exit $?

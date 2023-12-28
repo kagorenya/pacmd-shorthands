@@ -1,7 +1,8 @@
 #!/bin/sh
 set -Cu
 #set -vx ## Uncomment for debugging
+readonly LIBDIR="${HOME}/.local/lib/pacmd-shorthands"
 
-pacmd-get-source | xargs --no-run-if-empty pactl "$@"
+"${LIBDIR}/get-source-input" "analog" | xargs --no-run-if-empty pactl "$@"
 
 exit $?

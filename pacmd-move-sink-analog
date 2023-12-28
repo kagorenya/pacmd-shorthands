@@ -2,7 +2,7 @@
 set -Cu
 #set -vx ## Uncomment for debugging
 
-test "x${1:-}" = "x" && {
+test "$#" -eq 0 && {
     printf "Input a word about a sink-input:? "
     read -r REPLY
 }

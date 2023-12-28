@@ -1,0 +1,7 @@
+#!/bin/sh
+set -Cu
+#set -vx ## Uncomment for debugging
+
+LC_ALL=C pactl info | sed "/Default Sink/s/.\+: \(.\+\)/\1/p; d"
+
+exit $?

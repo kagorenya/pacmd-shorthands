@@ -1,7 +1,8 @@
 #!/bin/sh
 set -Cu
 #set -vx ## Uncomment for debugging
+readonly LIBDIR="${HOME}/.local/lib/pacmd-shorthands"
 
-pacmd-get-sink-hdmi | xargs --no-run-if-empty pactl "$@"
+"${LIBDIR}/get-sink" "hdmi" | xargs --no-run-if-empty pactl "$@"
 
 exit $?

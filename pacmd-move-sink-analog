@@ -1,12 +1,13 @@
 #!/bin/sh
 set -Cu
 #set -vx ## Uncomment for debugging
+readonly LIBDIR="${HOME}/.local/lib/pacmd-shorthands"
 
-test "x${1:-}" = "x" && {
+test "$#" -eq 0 && {
     printf "Input a word about a sink-input:? "
     read -r REPLY
 }
 
-pacmd-get-sink-input "${1:-$REPLY}" | xargs --no-run-if-empty pacmd-analog-sink move-sink-input
+"${LIBDIR}/get-sink-input" "${1:-$REPLY}" | xargs --no-run-if-empty pacmd-analog-sink move-sink-input
 
 exit $?

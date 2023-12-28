@@ -1,7 +1,13 @@
 #!/bin/sh
 set -Cu
 #set -vx ## Uncomment for debugging
+readonly LIBDIR="${HOME}/.local/lib/pacmd-shorthands"
 
-pacmd-get-source | xargs --no-run-if-empty pactl "$@"
+test "$#" -eq 0 && {
+    printf "What do you use input source type:? "
+    read -r REPLY
+}
+
+"${LIBDIR}/get-source-input" "${1:-$REPLY}" | xargs --no-run-if-empty pactl "$@"
 
 exit $?

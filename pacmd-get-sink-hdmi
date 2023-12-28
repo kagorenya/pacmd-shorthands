@@ -2,6 +2,6 @@
 set -Cu
 #set -vx ## Uncomment for debugging
 
-LC_ALL=C pactl list short sinks | sed --expression="/hdmi/{; s/\\([[:digit:]]\\+\\).\\+/\\1/; p; }; d"
+LC_ALL=C pactl list short sinks | sed "/hdmi/{; s/\\([[:digit:]]\\+\\).\\+/\\1/; p; }; d"
 
 exit $?

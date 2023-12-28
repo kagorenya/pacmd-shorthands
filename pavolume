@@ -2,6 +2,7 @@
 ## Control Pulse Audio
 set -Cu
 #set -vx ## Uncomment for debugging
+readonly LIBDIR="${HOME}/.local/lib/pacmd-shorthands"
 
 test $# -eq 0 || {
     case "$1" in
@@ -9,7 +10,7 @@ test $# -eq 0 || {
             pactl list short sink-inputs | cut --fields=1 | xargs -I @ pactl set-sink-input-mute @ toggle
             ;;
         *)
-            pacmd-get-default-sink | xargs --no-run-if-empty -I @ pactl set-sink-volume @ "$1" && \
+            "${LIBDIR}/get-default-sink" | xargs --no-run-if-empty -I @ pactl set-sink-volume @ "$1" && \
             paplay "${XDG_DATA_HOME}/sounds/default/stereo/audio-volume-change.oga"
             ;;
     esac

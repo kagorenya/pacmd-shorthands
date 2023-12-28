@@ -5,4 +5,3 @@ set -Cu
 LC_ALL=C pactl list short sinks | sed --expression="/analog/{; s/\\([[:digit:]]\\+\\).\\+/\\1/; p; }; d"
 
 exit $?
-

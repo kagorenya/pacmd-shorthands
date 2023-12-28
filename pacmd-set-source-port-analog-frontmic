@@ -5,4 +5,3 @@ set -Cu
 pacmd-get-source-analog | xargs --no-run-if-empty -I @ pactl set-source-port @ analog-input-front-mic
 
 exit $?
-

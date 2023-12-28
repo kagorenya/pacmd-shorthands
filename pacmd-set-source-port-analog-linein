@@ -2,6 +2,6 @@
 set -Cu
 #set -vx ## Uncomment for debugging
 
-pacmd-get-source-analog | xargs --no-run-if-empty -I@ pactl set-source-port @ analog-input-linein
+pacmd-get-source-analog | xargs --no-run-if-empty -I @ pactl set-source-port @ analog-input-linein
 
 exit $?

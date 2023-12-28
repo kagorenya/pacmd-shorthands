@@ -7,6 +7,6 @@ test "x${1:-}" = "x" && {
     read -r REPLY
 }
 
-pacmd-get-sink-input "${1:-$REPLY}" | xargs --no-run-if-empty -I {} pactl set-sink-input-mute {} toggle
+pacmd-get-sink-input "${1:-$REPLY}" | xargs --no-run-if-empty -I @ pactl set-sink-input-mute @ toggle
 
 exit $?

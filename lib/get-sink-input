@@ -22,7 +22,6 @@ else
             sinkinput="${line#Sink Input #}"
         elif [[ "$line" =~ $1 ]]; then
             echo "$sinkinput"
-            break
         fi
     done
 fi

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -Cu
 #set -vx ## Uncomment for debugging
 readonly LIBDIR="${HOME}/.local/lib/pacmd-shorthands"
@@ -7,7 +7,15 @@ test "$#" -eq 0 && {
     printf "Input a word about a sink-input:? "
     read -r REPLY
 }
+if [[ "$1" || "$REPLY" ]]; then
+    mapfile -t < <("${LIBDIR}/get-sink-input" "${1:-$REPLY}")
+fi
 
-"${LIBDIR}/get-sink-input" "${1:-$REPLY}" | xargs --no-run-if-empty pacmd-bluez-sink move-sink-input
+if [[ "$#" -gt 0 ]]; then
+    for line in "${MAPFILE[@]}"
+    do
+        pacmd-bluez-sink move-sink-input "$line"
+    done
+fi
 
 exit $?

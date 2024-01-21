@@ -1,0 +1,14 @@
+#!/bin/bash
+set -Cu
+#set -vx ## Uncomment for debugging
+readonly LIBDIR="${HOME}/.local/lib/pacmd-shorthands"
+
+if [[ $("${LIBDIR}/get-default-sink") =~ bluez ]]; then
+    pacmd-move-sink-hdmi
+    pacmd-hdmi-sink set-default-sink
+else
+    pacmd-move-sink-bluez
+    pacmd-bluez-sink set-default-sink
+fi
+
+exit $?

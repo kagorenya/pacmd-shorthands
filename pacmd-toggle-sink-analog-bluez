@@ -1,0 +1,14 @@
+#!/bin/bash
+set -Cu
+#set -vx ## Uncomment for debugging
+readonly LIBDIR="${HOME}/.local/lib/pacmd-shorthands"
+
+if [[ $("${LIBDIR}/get-default-sink") =~ analog ]]; then
+    pacmd-move-sink-bluez
+    pacmd-bluez-sink set-default-sink
+else
+    pacmd-move-sink-analog
+    pacmd-analog-sink set-default-sink
+fi
+
+exit $?

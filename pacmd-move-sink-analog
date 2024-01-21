@@ -11,7 +11,7 @@ if [[ "$1" || "$REPLY" ]]; then
     mapfile -t < <("${LIBDIR}/get-sink-input" "${1:-$REPLY}")
 fi
 
-if [[ "$#" -gt 0 ]]; then
+if [[ "${#MAPFILE[@]}" -gt 0 ]]; then
     for line in "${MAPFILE[@]}"
     do
         pacmd-analog-sink move-sink-input "$line"

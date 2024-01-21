@@ -3,15 +3,9 @@ set -Cu
 #set -vx ## Uncomment for debugging
 readonly LIBDIR="${HOME}/.local/lib/pacmd-shorthands"
 
-test "$#" -eq 0 && {
-    printf "Input a word about a sink-input:? "
-    read -r REPLY
-}
-if [[ "$1" || "$REPLY" ]]; then
-    mapfile -t < <("${LIBDIR}/get-sink-input" "${1:-$REPLY}")
-fi
+mapfile -t < <("${LIBDIR}/get-sink-input" "${1:-}")
 
-if [[ "$#" -gt 0 ]]; then
+if [[ "${#MAPFILE[@]}" -gt 0 ]]; then
     for line in "${MAPFILE[@]}"
     do
         pacmd-hdmi-sink move-sink-input "$line"

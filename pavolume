@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 ## Control Pulse Audio
 set -Cu
 #set -vx ## Uncomment for debugging
@@ -10,10 +10,18 @@ test $# -eq 0 || {
             pactl list short sink-inputs | cut --fields=1 | xargs -I @ pactl set-sink-input-mute @ toggle
             ;;
         *)
-            "${LIBDIR}/get-default-sink" | xargs --no-run-if-empty -I @ pactl set-sink-volume @ "$1" && \
+            if [[ "${2:-}" == "all" ]]; then
+                mapfile -t < <(pactl list short sinks | cut --fields=2)
+                for line in "${MAPFILE[@]}"
+                do
+                    pactl set-sink-volume "$line" "$1"
+                done
+            else
+                "${LIBDIR}/get-default-sink" | xargs --no-run-if-empty -I @ pactl set-sink-volume @ "$1"
+            fi
             paplay "${XDG_DATA_HOME}/sounds/default/stereo/audio-volume-change.oga"
             ;;
-    esac
+        esac
 
     printf "Current Volume: %s\n" "$(LANG=C pactl list sinks | sed "/Volume:/{; s@^[^/]\+/[[:space:]]\+\([^[:space:]]\+\).\+@\1@; q; }; d")" 1>&2
 }
